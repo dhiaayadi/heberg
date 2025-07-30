@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const VITE_API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "http://localhost:8080/api/panier";
 
 export const addToCart = async (produitId, quantite = 1) => {
   const token = localStorage.getItem("token");
   try {
     const response = await axios.post(
-      `${VITE_API_URL}/add`,      // <-- ici 'add' et non 'ajout'
+      `${API_URL}/add`,      // <-- ici 'add' et non 'ajout'
       { produitId, quantite },
       {
         headers: {

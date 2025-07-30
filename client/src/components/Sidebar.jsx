@@ -122,29 +122,7 @@ const Sidebar = ({ mobileOpen, setMobileOpen }) => {
         ))}
 
         {/* Theme Toggle Button */}
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={toggleTheme}
-          className={`flex items-center p-4 my-2 mx-3 rounded-xl transition-all duration-300
-            ${theme === 'dark' 
-              ? 'text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-red-900/50 hover:to-red-800/50' 
-              : 'text-gray-700 hover:text-white hover:bg-gradient-to-r hover:from-red-500/50 hover:to-red-600/50'}
-            hover:shadow-md`}
-        >
-          <div className="mr-3 relative">
-            {theme === 'dark' ? (
-              <Sun className={`drop-shadow-md ${theme === 'dark' ? 'text-yellow-400' : 'text-yellow-600'}`} size={22} />
-            ) : (
-              <Moon className={`drop-shadow-md ${theme === 'dark' ? 'text-indigo-400' : 'text-indigo-600'}`} size={22} />
-            )}
-          </div>
-          {(effectiveOpen || isMobile) && (
-            <span className="font-medium whitespace-nowrap overflow-hidden transition-all duration-300 ease-out">
-              {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-            </span>
-          )}
-        </motion.button>
+
       </nav>
 
       {/* User Info & Logout */}

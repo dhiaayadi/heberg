@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle } from "lucide-react";
-const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 export default function Chatbot({ isChatOpen, toggleChat }) {
   const [messages, setMessages] = useState([]);
@@ -18,9 +17,7 @@ export default function Chatbot({ isChatOpen, toggleChat }) {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const res = await fetch(
-          `${VITE_API_URL ? VITE_API_URL : ""}/api/chat/questions`
-        );
+        const res = await fetch("http://localhost:8080/api/chat/questions");
         const data = await res.json();
         setQuestions(data);
       } catch (err) {
@@ -76,15 +73,12 @@ export default function Chatbot({ isChatOpen, toggleChat }) {
     setMessages((prev) => [...prev, userMsg]);
     setIsTyping(true);
 
-     try {
-      const res = await fetch(
-        `${VITE_API_URL ? VITE_API_URL : ""}/api/chat`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: questionText }),
-        }
-      );
+    try {
+      const res = await fetch("http://localhost:8080/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: questionText }),
+      });
       const data = await res.json();
       const aiMsg = {
         content: data.reply || "Pas de réponse du serveur.",

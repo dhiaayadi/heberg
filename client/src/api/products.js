@@ -1,31 +1,30 @@
 import axios from 'axios';
 
-const VITE_API_URL = import.meta.env.VITE_API_URL;
 const api = axios.create({
-  baseURL: VITE_API_URL ? `${VITE_API_URL}/api/products` : '',
-  withCredentials: true,
+  baseURL: 'http://localhost:8080/api/products', // ✅ Change if your backend runs on a different port or subdomain
+  withCredentials: true, // 🧠 Sends/receives cookies like preAuthToken and token
 });
 
-// GET ALL Products
-export const getAllProducts = async () => {
-  return await api.get('/get-all-products');
+//-----------GET ALL Products (requires admin token cookie)
+export const getAllProducts = async (productData) => {
+  return await api.get('/get-all-products', productData);
 };
 
-// GET product BY ID
-export const getProductById = async (id) => {
+
+//  GET product BY ID (requires admin token cookie)
+export const getProductById = async (id) => {  
   return await api.get(`/get-product-by-id/${id}`);
-};
+}
 
-// DELETE product BY ID
+// DELETE product BY ID (requires admin token cookie)
 export const deleteProduct = async (id) => {
   return await api.delete(`/delete-product/${id}`);
-};
+}
 
-// CREATE product
 export const createProduct = async (productData) => {
   try {
-    const response = await api.post(
-      '/',
+    const response = await axios.post(
+      'http://localhost:8080/api/products',
       productData,
       {
         headers: {
@@ -40,22 +39,8 @@ export const createProduct = async (productData) => {
   }
 };
 
-// UPDATE product
-export const updateProduct = async (id, data) => {
-  try {
-    const response = await api.put(
-      `/${id}`,
-      data,
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Erreur mise à jour produit:", error.response?.data || error.message);
-    throw error;
-  }
-};
 
+export const updateProduct = (id, data) => {
+  return axios.put(`http://localhost:8080/api/products/${id}`, data);
+};
+export default api;

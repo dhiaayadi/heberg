@@ -1,7 +1,7 @@
 import axios from 'axios';
-const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 const api = axios.create({
-   baseURL: VITE_API_URL ? `${VITE_API_URL}/api/contact`: '', // ✅ Change if your backend runs on a different port or subdomain
+  baseURL: 'http://localhost:8080/api/contact', // ✅ Change if your backend runs on a different port or subdomain
   withCredentials: true, // 🧠 Sends/receives cookies like preAuthToken and token
 });
 

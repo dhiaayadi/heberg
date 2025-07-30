@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 // Create a reusable Axios instance
-const VITE_API_URL = import.meta.env.VITE_API_URL; // Default to local backend if not set
 const api = axios.create({
-  baseURL: VITE_API_URL ? `${VITE_API_URL}/api/auth` : '', // ✅ Change if your backend runs on a different port or subdomain
+  baseURL: 'http://localhost:8080/api/auth', // ✅ Change if your backend runs on a different port or subdomain
   withCredentials: true, // 🧠 Sends/receives cookies like preAuthToken and token
 });
 

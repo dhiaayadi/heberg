@@ -6,24 +6,22 @@ import PayPalButton from "./PayPalButton";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const VITE_API_URL = import.meta.env.VITE_API_URL;
-
 export default function VoirPanier() {
   const { cartItems, addToCart, removeFromCart, clearCart, handleRemove } = useCart();
   const { theme } = useTheme();
   const getThemeColors = () => ({
-    background: theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100',
-    cardBg: theme === 'dark' ? 'bg-gray-800' : 'bg-white',
-    text: theme === 'dark' ? 'text-white' : 'text-gray-900',
-    secondaryText: theme === 'dark' ? 'text-gray-400' : 'text-gray-600',
-    accent: 'text-[#ff1a1a]',
-    accentHover: 'hover:text-red-400',
-    buttonBg: theme === 'dark' ? 'bg-gray-700' : 'bg-gray-200',
-    buttonHover: theme === 'dark' ? 'hover:bg-gray-600' : 'hover:bg-gray-300',
-    border: theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
-  });
+  background: theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100',
+  cardBg: theme === 'dark' ? 'bg-gray-800' : 'bg-white',
+  text: theme === 'dark' ? 'text-white' : 'text-gray-900',
+  secondaryText: theme === 'dark' ? 'text-gray-400' : 'text-gray-600',
+  accent: 'text-[#ff1a1a]',
+  accentHover: 'hover:text-red-400',
+  buttonBg: theme === 'dark' ? 'bg-gray-700' : 'bg-gray-200',
+  buttonHover: theme === 'dark' ? 'hover:bg-gray-600' : 'hover:bg-gray-300',
+  border: theme === 'dark' ? 'border-gray-700' : 'border-gray-200'
+});
 
-  const colors = getThemeColors();
+const colors = getThemeColors(); // ← à ajouter
 
   const navigate = useNavigate();
 
@@ -42,7 +40,7 @@ export default function VoirPanier() {
       }));
 
       const response = await axios.post(
-        `${VITE_API_URL ? VITE_API_URL : ""}/api/stripe/create-checkout-session`,
+        "http://localhost:8080/api/stripe/create-checkout-session",
         { items: itemsForStripe },
         { withCredentials: true }
       );
@@ -61,9 +59,6 @@ export default function VoirPanier() {
     alert("Paiement PayPal réussi. Panier vidé.");
     navigate("/success");
   };
-
-
-  
 
   return (
     <div className={`min-h-screen flex flex-col py-10 px-4 md:px-20 transition duration-300 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden`}>

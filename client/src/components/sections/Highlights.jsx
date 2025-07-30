@@ -36,24 +36,29 @@ const highlights = [
 export default function Highlights() {
   return (
     <section className="py-20 font-outfit">
-      <div className="container mx-auto px-4">
-        {/* Updated heading to match CRP section */}
+      <motion.div
+        className="container mx-auto px-4"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+      >
         <div className="text-center max-w-5xl mx-auto mb-20">
           <motion.h1
-            className="text-5xl md:text-6xl font-bold mb-6"
             initial={{ opacity: 0, y: -40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
+            transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+            className="text-5xl md:text-6xl font-bold mb-6"
           >
             Les 4 points forts de <span className="text-[#ef5d81]">MEMO</span>
           </motion.h1>
           <motion.p
-            className="text-gray-600 text-lg md:text-xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+            className="text-gray-600 text-lg md:text-xl"
           >
             Découvrez pourquoi MEMO se distingue comme la solution de gestion
             idéale pour votre entreprise
@@ -61,38 +66,32 @@ export default function Highlights() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {highlights.map(
-            ({ title, description, icon: Icon, gradient }, index) => (
-              <motion.article
-                key={index}
-                className="flex space-x-5 bg-white border border-transparent rounded-lg p-8 shadow-sm hover:shadow-md transition"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  delay: 0.2 * index,
-                  duration: 0.6,
-                  ease: "easeOut",
-                }}
+          {highlights.map(({ title, description, icon: Icon, gradient }, index) => (
+            <motion.article
+              key={index}
+              className="flex space-x-5 bg-white border border-transparent rounded-lg p-8 shadow-sm hover:shadow-md transition"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 * index, duration: 0.6, ease: "easeOut" }}
+            >
+              <div
+                className={`flex-shrink-0 w-14 h-14 rounded-lg bg-gradient-to-tr ${gradient} flex items-center justify-center text-white`}
               >
-                <div
-                  className={`flex-shrink-0 w-14 h-14 rounded-lg bg-gradient-to-tr ${gradient} flex items-center justify-center text-white`}
-                >
-                  <Icon className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-[#ef5d81] transition-colors">
-                    {title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed  text-gray-600 text-base">
-                    {description}
-                  </p>{" "}
-                </div>
-              </motion.article>
-            )
-          )}
+                <Icon className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-3 group-hover:text-[#ef5d81] transition-colors">
+                  {title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed text-gray-600 text-base">
+                  {description}
+                </p>
+              </div>
+            </motion.article>
+          ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

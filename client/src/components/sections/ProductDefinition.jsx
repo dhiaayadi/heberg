@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { CheckCircle, Zap, Shield, Coins } from "lucide-react";
 
 const features = [
@@ -15,8 +16,7 @@ const highlights = [
   {
     icon: Zap,
     title: "Rapidité de déploiement",
-    description:
-      "Mise en place rapide grâce à notre base standard personnalisable",
+    description: "Mise en place rapide grâce à notre base standard personnalisable",
   },
   {
     icon: Shield,
@@ -26,17 +26,27 @@ const highlights = [
   {
     icon: Coins,
     title: "Économique",
-    description:
-      "Prix divisé par 3 comparé aux solutions CRM/ERP traditionnelles",
+    description: "Prix divisé par 3 comparé aux solutions CRM/ERP traditionnelles",
   },
 ];
 
 export default function ProductDefinition() {
   return (
     <section className="py-20 bg-[#f9fafb]" id="produit">
-      <div className="container mx-auto px-4">
+      <motion.div
+        className="container mx-auto px-4"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+      >
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+          >
             <span className="inline-block bg-[#fce7eb] text-[#ef718f] text-xs font-semibold rounded-md px-3 py-1 mb-3">
               Produit Hybride
             </span>
@@ -52,37 +62,46 @@ export default function ProductDefinition() {
             {/* Feature List */}
             <ul className="space-y-3 text-sm max-w-xl">
               {features.map((text, i) => (
-                <li key={i} className="flex items-center space-x-3">
+                <motion.li
+                  key={i}
+                  className="flex items-center space-x-3"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 * (i + 1), duration: 0.6, ease: "easeOut" }}
+                >
                   <CheckCircle className="w-6 h-6 text-[#ef5d81] flex-shrink-0 mt-0.5" />
-
                   <span>{text}</span>
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Highlight Boxes */}
           <div className="space-y-6">
             {highlights.map((h, i) => (
-              <div
+              <motion.div
                 key={i}
                 className="flex items-center space-x-4 bg-white rounded-lg p-5 shadow-sm"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 * (i + 1), duration: 0.6, ease: "easeOut" }}
               >
                 <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-[#ef718f] to-[#fca07a] text-white">
                   <h.icon className="w-6 h-6" />
                 </div>
-
                 <div>
                   <h3 className="font-semibold text-base">{h.title}</h3>
                   <p className="text-[#5f6a7d] text-sm max-w-xl">
                     {h.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

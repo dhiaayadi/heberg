@@ -1,11 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Building2,
-  Settings,
-  Users,
-  TrendingUp,
-} from "lucide-react";
+import { Building2, Settings, Users, TrendingUp } from "lucide-react";
 
 const features = [
   {
@@ -32,30 +27,36 @@ const features = [
 
 export default function QuEstCeQuUnCRP() {
   return (
-    <section className="py-24 px-6 md:px-12 bg-[#f9fafb] text-gray-800 min-h-screen " id="crp" >
+    <section className="py-24 px-6 md:px-12 bg-[#f9fafb] text-gray-800 min-h-screen" id="crp">
       {/* Title and Description */}
-      <div className="max-w-5xl mx-auto text-center mb-20">
+      <motion.div
+        className="max-w-5xl mx-auto text-center mb-20"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+      >
         <motion.h2
-          className="text-5xl md:text-6xl font-bold mb-6"
           initial={{ opacity: 0, y: -40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
+          transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+          className="text-5xl md:text-6xl font-bold mb-6"
         >
           Qu’est-ce qu’un <span className="text-[#ef5d81]">CRP</span> ?
         </motion.h2>
         <motion.p
-          className="text-lg md:text-xl text-gray-600 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+          transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+          className="text-lg md:text-xl text-gray-600 leading-relaxed"
         >
           Un CRP (Customer Resource Planning) est un système de gestion intégré qui optimise tous les
           processus de votre entreprise, de la conception à la facturation, en passant par la production
           et le suivi client.
         </motion.p>
-      </div>
+      </motion.div>
 
       {/* Feature Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">

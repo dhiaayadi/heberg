@@ -14,11 +14,10 @@ import supportRouter from './routes/supportRoutes.js'; // Added support routes
 import dotenv from 'dotenv';
 import crypto from 'crypto';
 import chatRoutes from './routes/chatRoutes.js';
-import path from 'path';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 // Connexion à la base de données
 connectDB();
@@ -62,12 +61,6 @@ app.use('/api/newsletter', newsletterRouter);
 app.use('/api/messages', messageRouter);
 app.use('/api/support', supportRouter); // Added support route
 app.use("/api/chat", chatRoutes);
-
-const __dirname =path.resolve();
-app.use(express.static(path.join(__dirname, 'client/dist')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
-});
 // 👉 ROUTE OLLAMA POUR TON CHATBOT
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;

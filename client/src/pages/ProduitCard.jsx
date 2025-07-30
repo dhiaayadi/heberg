@@ -2,8 +2,6 @@ import React from "react";
 import { addToCart } from "../api/cartService";
 import Swal from "sweetalert2";
 
-const VITE_API_URL = import.meta.env.VITE_API_URL;
-
 const ProduitCard = ({ produit }) => {
   const handleAddToCart = async () => {
     try {

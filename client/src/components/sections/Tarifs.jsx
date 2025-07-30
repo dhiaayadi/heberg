@@ -1,6 +1,7 @@
 import React from "react";
-import { Palette, Shield, Wrench } from "lucide-react";
 import { motion } from "framer-motion";
+import { Palette, Shield, Wrench } from "lucide-react";
+
 const tarifs = [
   {
     icon: Palette,
@@ -48,32 +49,36 @@ const tarifs = [
 
 export default function Tarifs() {
   return (
-    <section className="py-28 px-6 md:px-12 bg-white text-gray-800 font-outfit" id="couts" >
-      {/* Updated title section with matching animation */}
-      <div className="max-w-5xl mx-auto text-center mb-16">
+    <section className="py-28 px-6 md:px-12 bg-white text-gray-800 font-outfit" id="couts">
+      <motion.div
+        className="max-w-5xl mx-auto text-center mb-16"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+      >
         <motion.h2
-          className="text-5xl md:text-6xl font-bold mb-6"
           initial={{ opacity: 0, y: -40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
+          transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+          className="text-5xl md:text-6xl font-bold mb-6"
         >
           Structure de <span className="text-[#ef5d81]">coûts</span>{" "}
           transparente
         </motion.h2>
         <motion.p
-          className="text-lg md:text-xl text-gray-600 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+          transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+          className="text-lg md:text-xl text-gray-600 leading-relaxed"
         >
           Une approche claire et prévisible pour votre budget, avec des tarifs
           au forfait sans surprise
         </motion.p>
-      </div>
+      </motion.div>
 
-      {/* Updated cards with matching styling and animation */}
       <div className="grid lg:grid-cols-3 gap-8">
         {tarifs.map((card, idx) => (
           <motion.div
@@ -97,16 +102,21 @@ export default function Tarifs() {
             <p className="text-gray-600 text-base mb-6">{card.description}</p>
             <ul className="text-gray-900 text-base mb-6 space-y-3 max-w-xs text-left w-full">
               {card.features.map((item, i) => (
-                <li key={i} className="flex items-start">
+                <motion.li
+                  key={i}
+                  className="flex items-start"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 * (i + 1), duration: 0.6, ease: "easeOut" }}
+                >
                   <span className="w-2.5 h-2.5 rounded-full bg-pink-500 inline-block mt-2 mr-3 flex-shrink-0"></span>
                   <span className="text-sm">{item}</span>
-                </li>
+                </motion.li>
               ))}
             </ul>
-            <div className=" bg-primary/10 p-4 rounded-lg rounded-md  w-full ">
-              <p className="text-[#ef5d81]  text-sm font-medium ">
-                {card.note}{" "}
-              </p>
+            <div className="bg-primary/10 p-4 rounded-lg w-full">
+              <p className="text-[#ef5d81] text-sm font-medium">{card.note}</p>
             </div>
           </motion.div>
         ))}
